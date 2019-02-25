@@ -1,17 +1,84 @@
 <template>
-  <div>
-    <div class="border-bottom text-left"><h1 class="h2">{{ $t("app_menu_requireX") }}</h1></div>
-    <div class="div-text-area">Coming soon...
-      <br /><br />
-    </div>
-  </div>
+<v-form v-model="formValid">
+    <v-jsonschema-form v-if="schema" :schema="schema" :model="dataObject" :options="options" @error="showError" />
+  </v-form>
 </template>
 
 <script>
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+import Draggable from 'vuedraggable'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
+import Swatches from 'vue-swatches'
+import 'vue-swatches/dist/vue-swatches.min.css'
+import VJsonschemaForm from '@koumoul/vuetify-jsonschema-form'
+
+Vue.use(Vuetify)
+Vue.use(VueAxios, axios)
+
+Vue.component('swatches', Swatches)
+Vue.component('draggable', Draggable)
+
 export default {
-  name: 'hlvl',
-  data () {
-    return {}
+  components: {VJsonschemaForm},
+  data() {
+    return {
+      schema: {
+    'type': 'object',
+    properties: {
+      'name': { 'type': 'string' },
+      acceptTC: {
+        title: 'Accept terms and conditions',
+        type: 'boolean'
+      }
+    },
+    dependencies: {
+      acceptTC: {
+        oneOf: [{$ref: '#/definitions/creditCardPayment'}, {$ref: '#/definitions/paypalPayment'}]
+      }
+    },
+    definitions: {
+      'creditCardPayment': {
+        title: 'Credit card payment',
+        'properties': {
+          type: {const: 'creditcardpayment'},
+          'credit_card': { 'type': 'number' }
+        },
+        'required': ['name'],
+        'dependencies': {
+          'credit_card': {
+            'properties': {
+              'billing_address': { 'type': 'string' }
+            },
+            'required': ['billing_address']
+          }
+        }
+      },
+      'paypalPayment': {
+        title: 'Paypal payment',
+        'properties': {
+          type: {const: 'paypalpayment'},
+          'paypal account': { 'type': 'string' }
+        },
+        'required': ['account']
+      }
+    }
+  },
+      dataObject: {},
+      formValid: false,
+      options: {
+        debug: false,
+        disableAll: false,
+        autoFoldObjects: true
+      }
+    }
+  },
+  methods: {
+    showError(err) {
+      window.alert(err)
+    }
   }
 }
 </script>
