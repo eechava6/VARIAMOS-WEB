@@ -53,6 +53,16 @@
 
                     </li>
                     <li class="nav-item">
+                      <router-link class="nav-link" to="/requireX">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather">
+                        <circle cx="12" cy="12" r="10" />
+                        <circle cx="12" cy="12" r="5" />
+                        </svg>
+                        {{ $t("app_menu_requireX") }}
+                      </router-link>
+                    </li>
+
+                    <li class="nav-item">
                       <router-link class="nav-link" to="/applies">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather">
                         <circle cx="12" cy="12" r="10" />
