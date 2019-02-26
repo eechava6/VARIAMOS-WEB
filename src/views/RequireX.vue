@@ -7,12 +7,11 @@
 <script>
 import Vue from 'vue'
 import Vuetify from 'vuetify'
-import 'vuetify/dist/vuetify.min.css'
 import Draggable from 'vuedraggable'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import Swatches from 'vue-swatches'
-import 'vue-swatches/dist/vue-swatches.min.css'
+
 import VJsonschemaForm from '@koumoul/vuetify-jsonschema-form'
 
 Vue.use(Vuetify)
@@ -86,3 +85,4 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>
+

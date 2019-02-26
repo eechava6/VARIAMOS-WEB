@@ -8,8 +8,7 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './assets/css/dashboard.css'
 import './assets/css/fontawesome.css'
-
-
+import './assets/css/vuetify.min.css'
 Vue.config.productionTip = false
 Vue.use(VueI18n)
 Vue.use(Vuetify)
