@@ -25,46 +25,60 @@ export default {
   data() {
     return {
       schema: {
-    'type': 'object',
-    properties: {
-      'name': { 'type': 'string' },
-      acceptTC: {
-        title: 'Accept terms and conditions',
-        type: 'boolean'
-      }
-    },
-    dependencies: {
-      acceptTC: {
-        oneOf: [{$ref: '#/definitions/creditCardPayment'}, {$ref: '#/definitions/paypalPayment'}]
-      }
-    },
-    definitions: {
-      'creditCardPayment': {
-        title: 'Credit card payment',
-        'properties': {
-          type: {const: 'creditcardpayment'},
-          'credit_card': { 'type': 'number' }
+  "type": "object",
+  "properties": {
+     "reqType":{ 
+      "title":"Choose a type",
+      "type": "string",
+      "enum": [
+      "Restriction",
+      "Functional Requirement",
+      "Quality Requirement"
+      ]
+  }},
+  "dependencies": {
+    "reqType": {
+      "oneOf": [
+        {
+          "$ref": "#/definitions/userInt"
         },
-        'required': ['name'],
-        'dependencies': {
-          'credit_card': {
-            'properties': {
-              'billing_address': { 'type': 'string' }
-            },
-            'required': ['billing_address']
-          }
+        {
+          "$ref": "#/definitions/autoAct"
+        },
+        {
+          "$ref": "#/definitions/extInt"
         }
-      },
-      'paypalPayment': {
-        title: 'Paypal payment',
-        'properties': {
-          type: {const: 'paypalpayment'},
-          'paypal account': { 'type': 'string' }
-        },
-        'required': ['account']
-      }
+      ]
     }
   },
+  "definitions": {
+    "userInt": {
+      "title": "User Interface",
+      "properties": {
+        "type": {
+          "const": "userInt"
+        },
+      }
+    },
+    "autoAct": {
+      "title": "Autonomous Activity",
+      "properties": {
+        "type": {
+          "const": "autoAct"
+        },
+
+      }
+    },
+    "extInt": {
+      "title": "External interface",
+      "properties": {
+        "type": {
+          "const": "extInt"
+        },
+      }
+    }
+  }
+},
       dataObject: {},
       formValid: false,
       options: {
