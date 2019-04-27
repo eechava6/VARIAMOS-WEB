@@ -13,9 +13,9 @@ export default new Router({
       component: () => import('./views/Home.vue')
     },
     {
-      path: '/about',
-      name: 'about',
-      component: () => import('./views/About.vue')
+      path: '/team',
+      name: 'Team',
+      component: () => import('./views/Team.vue')
     },
     {
       path: '/models/:type',
